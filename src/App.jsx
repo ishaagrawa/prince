@@ -11,22 +11,22 @@ const PASSWORD = "1315"; // Change this to your own secret password
 
 const memories = [
   {
-    image: "src/images/memory1.jpeg",
+    image: "/images/memory1.jpeg",
     title: "My favourite smile",
     message: "The smile I could look at a thousand times and never get tired of."
   },
   {
-    image: "src/images/memory2.jpeg",
+    image: "/images/memory2.jpeg",
     title: "My happy place",
     message: "Somehow, even ordinary moments become magical with you."
   },
   {
-    image: "src/images/memory4.jpeg",
+    image: "/images/memory4.jpeg",
     title: "My favourite person",
     message: "Out of everyone in this world, my heart picked you."
   },
   {
-    image: "src/images/memory3.jpeg",
+    image: "/images/memory3.jpeg",
     title: "A forever memory",
     message: "I hope we make a million more memories together."
   }
