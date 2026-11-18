@@ -1,11 +1,12 @@
 
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Heart, Sparkles, Lock, Unlock, Gift, Mail,
   Flower2, Star, X, ArrowDown, ChevronRight,
   Crown, KeyRound
 } from "lucide-react";
 import "./App.css";
+import { useRef, useState } from "react";
 
 const PASSWORD = "1315"; // Change this to your own secret password
 
@@ -40,6 +41,55 @@ const reasons = [
   ["🌙", "Your comfort", "You feel like home to me."],
   ["🎀", "Just because", "I don't need a reason to adore you."]
 ];
+
+
+
+function MusicPlayer() {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleMusic = async () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      try {
+        await audioRef.current.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error("Music could not play:", error);
+      }
+    }
+  };
+
+  return (
+    <div className="music-player">
+      <audio
+        ref={audioRef}
+        src="/music/our-song.mp3"
+        loop
+        onEnded={() => setIsPlaying(false)}
+        onPause={() => setIsPlaying(false)}
+        onPlay={() => setIsPlaying(true)}
+      />
+
+      <button
+        className={`music-button ${isPlaying ? "playing" : ""}`}
+        onClick={toggleMusic}
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+      >
+        {isPlaying ? "♫" : "▶"}
+      </button>
+
+      <span className="music-label">
+        {isPlaying ? "Playing our song ♡" : "Our little melody ♡"}
+      </span>
+    </div>
+  );
+}
+
 
 function App() {
   const [giftOpen, setGiftOpen] = useState(false);
@@ -181,7 +231,7 @@ function App() {
           )}
         </div>
       </section>
-
+ <MusicPlayer />
       {/* 3. LOVE LETTER */}
       <section className="section letter-section" id="letter">
         <div className="section-heading">
@@ -473,6 +523,7 @@ function App() {
           <br /> © Just for my Prince Charming ♡
         </footer>
       </section>
+    
     </main>
   );
 }
